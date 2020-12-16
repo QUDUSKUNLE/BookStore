@@ -32,7 +32,7 @@ export class BooksService {
     return 'Books added successfully';
   }
 
-  deleteBooks(id): Promise<any> {
+  deleteBooks(id): Promise<string> {
     const deleteId = id;
     return new Promise(resolve => {
       this.booksRepository.delete(deleteId);
