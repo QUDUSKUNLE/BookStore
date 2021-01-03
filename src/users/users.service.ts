@@ -21,12 +21,14 @@ export class UsersService {
   }
 
   async createUser(user: Users): Promise<object> {
-    const { userName } = user;
-    const checkUsername = await this.usersRepository.findOne({ userName });
-    if (!checkUsername) {
-      this.usersRepository.insert(user);
-      return { message: 'User created successfully' };
+    try {
+      const newUser = await this.usersRepository.insert(user);
+      return { message: 'User created successfully', id: newUser.identifiers[0].id };
+    } catch (err) {
+      if (err.code === '23505') {
+        return { error: 'User already exist', message: err.message }
+      }
+      return { error: err }
     }
-    return { error: 'User already exist' }
   }
 }
