@@ -18,7 +18,7 @@ export class UsersController {
   }
 
   @Post()
-  createUser(@Body() user: Users): string {
+  createUser(@Body() user: Users): Promise<object> {
     return this.usersService.createUser(user);
   }
 }

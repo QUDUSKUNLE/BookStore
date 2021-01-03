@@ -12,7 +12,6 @@ export class Book {
   @Column()
   description: string;
   
-
   @OneToMany(type => User, user => user.id)
   user: User[]
 }
