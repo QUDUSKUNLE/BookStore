@@ -18,8 +18,8 @@ export class BooksController {
   }
 
   @Post()
-  async addBooks(@Body() createBookDto: CreateBookDTO): Promise<string> {
-    return await  this.booksService.addBooks(createBookDto);
+  async addBooks(@Body() createBookDto: CreateBookDTO): Promise<object> {
+    return await this.booksService.addBooks(createBookDto);
   }
 
   @Delete()

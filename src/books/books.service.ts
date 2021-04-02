@@ -27,9 +27,16 @@ export class BooksService {
     })
   }
 
-  addBooks(book): string {
-    this.booksRepository.insert(book);
-    return 'Books added successfully';
+  async addBooks(book): Promise<object> {
+    try {
+      const newBook = await this.booksRepository.insert(book);
+      return { message: 'Books added successfully', id: newBook.identifiers[0].id };
+    } catch (err) {
+      if (err.code === '23505') {
+        return { error: 'Book already exist', message: err.message }
+      }
+      return { error: err }
+    }
   }
 
   deleteBooks(id): Promise<string> {

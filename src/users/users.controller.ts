@@ -18,6 +18,7 @@ export class UsersController {
   }
 
   @Post()
+  // eslint-disable-next-line @typescript-eslint/ban-types
   createUser(@Body() user: Users): Promise<object> {
     return this.usersService.createUser(user);
   }
